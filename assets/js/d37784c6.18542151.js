@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkchristopher_nguyen_re=self.webpackChunkchristopher_nguyen_re||[]).push([[2452],{9163:e=>{e.exports=JSON.parse('{"permalink":"/blog/tags/binary-exploitation/page/2","page":2,"postsPerPage":10,"totalPages":2,"totalCount":11,"previousPage":"/blog/tags/binary-exploitation","blogDescription":"Blog","blogTitle":"Blog"}')}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkchristopher_nguyen_re=self.webpackChunkchristopher_nguyen_re||[]).push([[2765],{2407:function(e){e.exports=JSON.parse('{"allTagsPath":"/blog/tags","name":"Pico CTF","count":2,"permalink":"/blog/tags/pico-ctf"}')}}]);
