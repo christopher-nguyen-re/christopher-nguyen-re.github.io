@@ -29,6 +29,8 @@ Using Ghidra, we find that there is a ```scanf``` vulnerability that can lead to
 
 There is no flag within the binary so we will try to obtain a shell. If we leak a libc address, we can find the base address of the library and then utilize the system function to start a shell.
 
+To get the binary to run locally, I used ```pwninit``` to automatically fetch a linker that can load the provided libc without segfaulting and patch the vuln binary.
+
 A common technique here is to use ```puts``` to leak the ```puts``` GOT. With the ```puts``` address, we can determine the address for system and craft a ropchain to run ```system("bin/sh")```. Due to stack alignment, I needed an extra ```ret``` instruction.
 
 Now we have a shell and can see that there is a flag file that we can ```cat```.
