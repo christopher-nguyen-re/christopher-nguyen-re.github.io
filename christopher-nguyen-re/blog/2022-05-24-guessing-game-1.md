@@ -15,6 +15,10 @@ I made a simple game to show off my programming skills. See if you can beat it!
 
 Challenge can be found [here](https://play.picoctf.org/practice/challenge/90?page=1&search=guess)
 
+## Analysis
+
+Using ```checksec```, we find that the program has stack canary, partial relro, and NX enabled. The architecture is amd64 little endian.
+
 ## The Solve
 
 Upon inspection of the source code, I saw that there is no call to ```srand()``` meaning that the value for ```rand()``` stays the same every time the program is run. We can extract the value using gdb and get ```0x53```. Incrementing this by 1 gives us the correct value ```84```. Entering this value to the program allows us to reach the ```win``` function.
